@@ -11,4 +11,6 @@ export class TablesComponent implements OnInit {
     constructor() {}
 
     ngOnInit() {}
+
+
 }
