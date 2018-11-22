@@ -1,127 +1,56 @@
 <div [@routerTransition]>
     <app-page-header [heading]="'Поиск сотрудников'" [icon]="'fa-table'"></app-page-header>
-    <div class="row">
-        <div class="col col-xl-6 col-lg-12">
-            <div class="card mb-3">
-                <div class="card-header">Таблица</div>
-                <div class="card-body table-responsive">
-                    <table class="table table-hover table-striped">
-                        <thead>
-                        <tr>
-                            <th>Column</th>
-                            <th>Column</th>
-                            <th>Column</th>
-                            <th>Column</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>Row</td>
-                            <td>Row</td>
-                            <td>Row</td>
-                            <td><button>Приглашение</button></td>
-                        </tr>
-                        <tr>
-                            <td>Row</td>
-                            <td>Row</td>
-                            <td>Row</td>
-                            <td><button>Приглашение</button></td>
-                        </tr>
-                        <tr>
-                            <td>Row</td>
-                            <td>Row</td>
-                            <td>Row</td>
-                            <td><button>Приглашение</button></td>
-                        </tr>
-                        <tr>
-                            <td>Row</td>
-                            <td>Row</td>
-                            <td>Row</td>
-                            <td><button>Приглашение</button></td>
-                        </tr>
-                        <tr>
-                            <td>Row</td>
-                            <td>Row</td>
-                            <td>Row</td>
-                            <td><button>Приглашение</button></td>
-                        </tr>
-                        <tr>
-                            <td>Row</td>
-                            <td>Row</td>
-                            <td>Row</td>
-                            <td><button>Приглашение</button></td>
-                        </tr>
-                        <tr>
-                            <td>Row</td>
-                            <td>Row</td>
-                            <td>Row</td>
-                            <td><button>Приглашение</button></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+
+
+    <input #searching (keyup.enter)="search(searching.value)" (blur)="search(searching.value); searching.value='' ">
+
+    <button mat-button (click)="search(searching.value)">Поиск</button>
+
+
+    <div class="mat-elevation-z8 list-div-container">
+
+        <!--<div class="example-loading-shade"-->
+             <!--*ngIf="isLoadingResults || isRateLimitReached">-->
+            <!--<mat-spinner *ngIf="isLoadingResults"></mat-spinner>-->
+        <!--</div>-->
+
+        <div class="example-table-container">
+
+            <table mat-table [dataSource]="data" class="example-table">
+
+                <ng-container matColumnDef="pos">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Должность</th>
+                    <td mat-cell *matCellDef="let client">{{client.position}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="age">
+                    <th mat-header-cell *matHeaderCellDef>Возраст</th>
+                    <td mat-cell *matCellDef="let client">{{client.age}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="exp">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Опыт работы</th>
+                    <td mat-cell *matCellDef="let client">{{client.experience}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="last_j">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Последнее место работы</th>
+                    <td mat-cell *matCellDef="let client">{{client.last_job}}</td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                    [ngClass]="{ 'selected': selection.isSelected(row)}"></tr>
+                    <!--(click)="selection.select(row)"></tr>-->
+
+            </table>
+
         </div>
-        <div class="col col-xl-6 col-lg-12">
-            <div class="card mb-3">
-                <div class="card-header">Таблица</div>
-                <div class="card-body table-responsive">
-                    <table class="table table-hover table-striped">
-                        <thead>
-                        <tr>
-                            <th>Column</th>
-                            <th>Column</th>
-                            <th>Column</th>
-                            <th>Column</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>Row</td>
-                            <td>Row</td>
-                            <td>Row</td>
-                            <td><button>Приглашение</button></td>
-                        </tr>
-                        <tr>
-                            <td>Row</td>
-                            <td>Row</td>
-                            <td>Row</td>
-                            <td><button>Приглашение</button></td>
-                        </tr>
-                        <tr>
-                            <td>Row</td>
-                            <td>Row</td>
-                            <td>Row</td>
-                            <td><button>Приглашение</button></td>
-                        </tr>
-                        <tr>
-                            <td>Row</td>
-                            <td>Row</td>
-                            <td>Row</td>
-                            <td><button>Приглашение</button></td>
-                        </tr>
-                        <tr>
-                            <td>Row</td>
-                            <td>Row</td>
-                            <td>Row</td>
-                            <td><button>Приглашение</button></td>
-                        </tr>
-                        <tr>
-                            <td>Row</td>
-                            <td>Row</td>
-                            <td>Row</td>
-                            <td><button>Приглашение</button></td>
-                        </tr>
-                        <tr>
-                            <td>Row</td>
-                            <td>Row</td>
-                            <td>Row</td>
-                            <td><button>Приглашение</button></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+
+        <mat-paginator [length]="resultsLength" [pageSize]="5"
+                       [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+
     </div>
+
+
 </div>
