@@ -17,7 +17,8 @@ export class TablesComponent implements OnInit {
     resultsLength = 100;
     data: ResultRecord[] = [];
     temp: ResultRecord[] = [];
-    displayedColumns = ['pos', 'age', 'exp', 'last_j'];
+    isLoadingResult = false;
+    displayedColumns = ['pos', 'age', 'exp', 'last_j', 'info'];
 
     constructor(private http: SearchService) {
     }
@@ -25,22 +26,40 @@ export class TablesComponent implements OnInit {
     ngOnInit() {
     }
 
-    search(newHero: string) {
-        console.log(newHero);
+    search(str: string) {
+        this.isLoadingResult = true;
+        this.temp = [];
+        this.data = [];
+        console.log('searching for = ' + str);
+        if (str !== '') {
+            this.http.get('http://localhost:8080/search/' + str).subscribe(value => {
+                    for (const val of value) {
+                        const resRecord = new ResultRecord(val);
+                        this.temp.push(resRecord);
+                    }
+                    this.data = this.temp;
+                    this.isLoadingResult = false;
+                },
+                error => {
+                    console.log(error);
+                    this.isLoadingResult = false;
+                });
+        } else {
+            this.isLoadingResult = false;
+            console.log('empty = ' + str);
+        }
 
-        this.http.get('http://localhost:8080/search').subscribe(value => {
-                for (const val of value) {
-                    const resRecord = new ResultRecord(val);
-                    console.log(resRecord.position);
-                    this.temp.push(resRecord);
-                }
-                this.data = this.temp;
-                console.log(this.data.length);
-            },
-            error => {
-                console.log(error);
-            });
+    }
 
+    info(str: string) {
+        if (str !== '') {
+            const url = 'https://hh.kz/resume/' + str;
+            // window.location.href = url;
+            window.open(url, '_blank');
+            console.log('hash = ' + str);
+        } else {
+            console.log('empty hash');
+        }
     }
 
     public get(url: string): Observable<any> {
