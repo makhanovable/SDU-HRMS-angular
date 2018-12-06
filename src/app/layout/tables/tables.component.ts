@@ -66,4 +66,19 @@ export class TablesComponent implements OnInit {
         return this.http.get(url);
     }
 
+    open(str: string) {
+        // this.http.get('http://localhost:8080/search/' + 'cdsa').subscribe(value => {
+        //         for (const val of value) {
+        //             const resRecord = new ResultRecord(val);
+        //             this.temp.push(resRecord);
+        //         }
+        //         this.data = this.temp;
+        //         this.isLoadingResult = false;
+        //     },
+        //     error => {
+        //         console.log(error);
+        //         this.isLoadingResult = false;
+        //     });
+    }
+
 }
