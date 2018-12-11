@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit {
         this.data = [];
         console.log('searching for = ' + str);
         if (str !== '') {
-            this.http.get('http://localhost:8080/search/' + str).subscribe(value => {
+            this.http.get('http://localhost:8080/search/' + str + '/source').subscribe(value => {
                     for (const val of value) {
                         const resRecord = new ResultRecord(val);
                         this.temp.push(resRecord);
