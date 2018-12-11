@@ -1,0 +1,121 @@
+table {
+    width: 100%;
+}
+
+.list-div-container {
+    width: 90%;
+    margin: 5% auto;
+    position: relative;
+}
+
+.nnn {
+    width: 25%;
+    margin: 1% auto;
+    margin-left: 1%;
+    position: relative;
+}
+
+.m {
+    width: 20%;
+    margin: 1% auto;
+    margin-left: 1%;
+    position: relative;
+}
+
+.example-loading-shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 56px;
+    right: 0;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.example-rate-limit-reached {
+    color: #980000;
+    max-width: 360px;
+    text-align: center;
+}
+
+.example-table-container {
+    position: relative;
+    max-height: 400px;
+    overflow: auto;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 95%;
+}
+
+.makhan-btn {
+    position: absolute;
+    bottom: 0px;
+    right: -50px;
+    display: flex;
+    align-items: center;
+}
+
+.makhan-btn ul {
+    list-style: none;
+}
+
+.makhan-btn button {
+    margin-bottom: 4px;
+}
+
+.makhan-filter {
+    margin-left: 20px;
+    margin-top: 5px;
+}
+
+.mat-row.selected {
+    background: #dddddd;
+}
+.mat-row:hover {
+    background-color: #dddddd;
+}
+.mat-row{
+    cursor: pointer;
+}
+
+.spinner-container {
+    height: 360px;
+    width: 390px;
+    position: fixed;
+}
+
+.spinner-container mat-spinner {
+    margin: 130px auto 0 auto;
+}
+
+/* Column Widths */
+.mat-column-number,
+.mat-column-state {
+    max-width: 64px;
+}
+
+.mat-column-created {
+    max-width: 124px;
+}
+.report_btn {
+    margin-left: 550px;
+    alignment: right;
+}
+mat-toolbar {
+    position: relative;
+    width: 100%;
+}
+.report {
+    position: absolute;
+    right: 5%;
+    color: gray;
+    border-radius: 5px;
+    background: white;
+    padding: 5px;
+    width: 20%;
+}

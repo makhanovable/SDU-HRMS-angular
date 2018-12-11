@@ -1,63 +1,75 @@
-<!--<div [@routerTransition]>-->
-    <!--<h2 class="text-muted">Dashboard <small>Statistics Overview</small></h2>-->
-    <!--<div class="row">-->
-        <!--<div class="col-md-12">-->
-            <!--<ngb-carousel>-->
-                <!--<ng-template ngbSlide *ngFor="let slider of sliders">-->
-                    <!--<img class="img-fluid mx-auto d-block" [src]="slider.imagePath" alt="Random first slide" width="100%">-->
-                    <!--<div class="carousel-caption">-->
-                        <!--<h3>{{slider.label}}</h3>-->
-                        <!--<p>{{slider.text}}</p>-->
-                    <!--</div>-->
-                <!--</ng-template>-->
-            <!--</ngb-carousel>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<hr>-->
-    <!--<div class="row">-->
-        <!--&lt;!&ndash;<div class="col-xl-3 col-lg-6">&ndash;&gt;-->
-            <!--&lt;!&ndash;<app-stat [bgClass]="'primary'" [icon]="'fa-comments'" [count]="26" [label]="'New Comments!'" ></app-stat>&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-        <!--<div class="col-xl-3 col-lg-6">-->
-            <!--<app-stat [bgClass]="'warning'" [icon]="'fa-tasks'" [count]="12" [label]="'New task!'" ></app-stat>-->
-        <!--</div>-->
-        <!--&lt;!&ndash;<div class="col-xl-3 col-lg-6">&ndash;&gt;-->
-            <!--&lt;!&ndash;<app-stat [bgClass]="'success'" [icon]="'fa-shopping-cart'" [count]="124" [label]="'New Orders!'" ></app-stat>&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-        <!--&lt;!&ndash;<div class="col-xl-3 col-lg-6">&ndash;&gt;-->
-            <!--&lt;!&ndash;<app-stat [bgClass]="'danger'" [icon]="'fa-support'" [count]="13" [label]="'New Tickets!'"></app-stat>&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-    <!--</div>-->
-    <!--<hr />-->
-    <!--<ngb-alert [type]="alert.type" (close)="closeAlert(alert)" *ngFor="let alert of alerts">{{ alert.message }}</ngb-alert>-->
-    <!--<hr />-->
-    <!--<div class="row">-->
-        <!--&lt;!&ndash;<div class="col-lg-8">&ndash;&gt;-->
-            <!--&lt;!&ndash;<div class="card card-default">&ndash;&gt;-->
-                <!--&lt;!&ndash;<div class="card-header">&ndash;&gt;-->
-                    <!--&lt;!&ndash;<i class="fa fa-clock-o fa-fw"></i> Responsive Timeline&ndash;&gt;-->
-                <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                <!--&lt;!&ndash;&lt;!&ndash; /.card-header &ndash;&gt;&ndash;&gt;-->
-                <!--&lt;!&ndash;<app-timeline></app-timeline>&ndash;&gt;-->
-                <!--&lt;!&ndash;&lt;!&ndash; /.card-body &ndash;&gt;&ndash;&gt;-->
-            <!--&lt;!&ndash;</div>&ndash;&gt;-->
-            <!--&lt;!&ndash;&lt;!&ndash; /.card &ndash;&gt;&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-        <!--&lt;!&ndash; /.col-lg-8 &ndash;&gt;-->
-        <!--&lt;!&ndash;<div class="col-lg-4">&ndash;&gt;-->
-            <!--&lt;!&ndash;<div class="card card-default mb-3">&ndash;&gt;-->
-                <!--&lt;!&ndash;<div class="card-header">&ndash;&gt;-->
-                    <!--&lt;!&ndash;<i class="fa fa-bell fa-fw"></i> Notifications card&ndash;&gt;-->
-                <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                <!--&lt;!&ndash;&lt;!&ndash; /.card-header &ndash;&gt;&ndash;&gt;-->
-                <!--&lt;!&ndash;<app-notification></app-notification>&ndash;&gt;-->
-                <!--&lt;!&ndash;&lt;!&ndash; /.card-body &ndash;&gt;&ndash;&gt;-->
-            <!--&lt;!&ndash;</div>&ndash;&gt;-->
-            <!--&lt;!&ndash;&lt;!&ndash; /.card &ndash;&gt;&ndash;&gt;-->
+<div [@routerTransition]>
+    <app-page-header [heading]="'Поиск сотрудников'" [icon]="'fa-table'"></app-page-header>
 
-            <!--&lt;!&ndash;<app-chat></app-chat>&ndash;&gt;-->
-            <!--&lt;!&ndash;&lt;!&ndash; /.card .chat-card &ndash;&gt;&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-        <!--&lt;!&ndash; /.col-lg-4 &ndash;&gt;-->
-    <!--</div>-->
-<!--</div>-->
+    <div class="mat-elevation-z8 list-div-container">
+
+        <input class="nnn" #searching (keyup.enter)="search(searching.value)">
+
+            <select class="m" matNativeControl required>
+                <option value="other">Не имеет значения</option>
+                <option value="y13">От 1 года до 3 лет</option>
+                <option value="y36">От 3 до 6 лет</option>
+                <option value="n">Без опыта</option>
+                <option value="y6">Более 6 лет</option>
+            </select>
+
+            <select class="m" matNativeControl required>
+                <option value="other">Не имеет значения</option>
+                <option value="k200500">От 200k-500k</option>
+                <option value="k500700">От 500k-700k</option>
+                <option value="k700">От 700k</option>
+                <option value="k200">До 200k</option>
+            </select>
+
+            <select class="m" matNativeControl required>
+                <option value="hh">hh.kz</option>
+                <option value="linkedin">linkedin.com</option>
+            </select>
+
+        <button mat-button (click)="search(searching.value)">Поиск</button>
+
+        <div class="example-loading-shade" *ngIf="isLoadingResult">
+            <mat-spinner></mat-spinner>
+        </div>
+
+        <div class="example-table-container">
+
+            <table mat-table [dataSource]="data" class="example-table">
+
+                <ng-container matColumnDef="pos">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Должность</th>
+                    <td mat-cell *matCellDef="let result">{{result.position}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="age">
+                    <th mat-header-cell *matHeaderCellDef>Возраст</th>
+                    <td mat-cell *matCellDef="let result">{{result.age}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="exp">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Опыт работы</th>
+                    <td mat-cell *matCellDef="let result">{{result.experience}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="last_j">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Последнее место работы</th>
+                    <td mat-cell *matCellDef="let result">{{result.last_job}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="info">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+                    <button mat-button *matCellDef="let result" (click)="info(result.id)">Инфо</button>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            </table>
+
+        </div>
+
+        <!--<mat-paginator [length]="resultsLength" [pageSize]="5"-->
+                       <!--[pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>-->
+    </div>
+
+</div>
