@@ -1,8 +1,8 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {routerTransition} from '../../router.animations';
 import {ResultRecord} from './result.record';
-import {Observable} from 'rxjs';
 import {SearchService} from './search.service';
+import {HttpParams} from '@angular/common/http';
 
 @Component({
     selector: 'app-dashboard',
@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
     data: ResultRecord[] = [];
     temp: ResultRecord[] = [];
     isLoadingResult = false;
+    count: number;
     displayedColumns = ['pos', 'age', 'exp', 'last_j', 'info'];
 
     constructor(private http: SearchService) {
@@ -25,28 +26,47 @@ export class DashboardComponent implements OnInit {
     }
 
     search(str: string) {
+        console.log('searching for = ' + str);
+
+        let params = new HttpParams();
+        params = params.set('wrd', str);
+        params = params.set('exp', '180');
+        params = params.set('sal', '180-08426');
+        params = params.set('src', 'hh');
+        params = params.set('page', '0');
+        this.load(params);
+    }
+
+    loadPage(event) {
+        console.log('searching for = ');
+
+        let params = new HttpParams();
+        params = params.set('wrd', '');
+        params = params.set('exp', '180');
+        params = params.set('sal', '180-08426');
+        params = params.set('src', 'link');
+        params = params.set('page', event.pageIndex + '');
+        this.load(params);
+    }
+
+    load(params: HttpParams) {
         this.isLoadingResult = true;
         this.temp = [];
         this.data = [];
-        console.log('searching for = ' + str);
-        if (str !== '') {
-            this.http.get('http://localhost:8080/search/' + str + '/source').subscribe(value => {
-                    for (const val of value) {
-                        const resRecord = new ResultRecord(val);
-                        this.temp.push(resRecord);
-                    }
-                    this.data = this.temp;
-                    this.isLoadingResult = false;
-                },
-                error => {
-                    console.log(error);
-                    this.isLoadingResult = false;
-                });
-        } else {
-            this.isLoadingResult = false;
-            console.log('empty = ' + str);
-        }
-
+        this.http.get('http://localhost:8080/search/', {params: params}).subscribe(value => {
+                const str_count = JSON.stringify(value.count).replace(/["]+/g, '');
+                this.count = +str_count;
+                for (const val of value.list) {
+                    const resRecord = new ResultRecord(val);
+                    this.temp.push(resRecord);
+                }
+                this.data = this.temp;
+                this.isLoadingResult = false;
+            },
+            error => {
+                console.log(error);
+                this.isLoadingResult = false;
+            });
     }
 
     info(str: string) {
@@ -57,10 +77,6 @@ export class DashboardComponent implements OnInit {
         } else {
             console.log('empty hash');
         }
-    }
-
-    public get(url: string): Observable<any> {
-        return this.http.get(url);
     }
 
 }

@@ -7,7 +7,7 @@ export class SearchService {
     constructor(private httpClient: HttpClient) {
     }
 
-    public get(url: string): Observable<any> {
-        return this.httpClient.get(url);
+    public get(url: string, params: object): Observable<any> {
+        return this.httpClient.get(url, params);
     }
 }

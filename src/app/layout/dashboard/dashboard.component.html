@@ -5,26 +5,26 @@
 
         <input class="nnn" #searching (keyup.enter)="search(searching.value)">
 
-            <select class="m" matNativeControl required>
-                <option value="other">Не имеет значения</option>
-                <option value="y13">От 1 года до 3 лет</option>
-                <option value="y36">От 3 до 6 лет</option>
-                <option value="n">Без опыта</option>
-                <option value="y6">Более 6 лет</option>
-            </select>
+        <select class="m" matNativeControl required>
+            <option value="other">Не имеет значения</option>
+            <option value="y13">От 1 года до 3 лет</option>
+            <option value="y36">От 3 до 6 лет</option>
+            <option value="n">Без опыта</option>
+            <option value="y6">Более 6 лет</option>
+        </select>
 
-            <select class="m" matNativeControl required>
-                <option value="other">Не имеет значения</option>
-                <option value="k200500">От 200k-500k</option>
-                <option value="k500700">От 500k-700k</option>
-                <option value="k700">От 700k</option>
-                <option value="k200">До 200k</option>
-            </select>
+        <select class="m" matNativeControl required>
+            <option value="other">Не имеет значения</option>
+            <option value="k200500">От 200k-500k</option>
+            <option value="k500700">От 500k-700k</option>
+            <option value="k700">От 700k</option>
+            <option value="k200">До 200k</option>
+        </select>
 
-            <select class="m" matNativeControl required>
-                <option value="hh">hh.kz</option>
-                <option value="linkedin">linkedin.com</option>
-            </select>
+        <select class="m" matNativeControl required>
+            <option value="hh">hh.kz</option>
+            <option value="linkedin">linkedin.com</option>
+        </select>
 
         <button mat-button (click)="search(searching.value)">Поиск</button>
 
@@ -68,8 +68,8 @@
 
         </div>
 
-        <!--<mat-paginator [length]="resultsLength" [pageSize]="5"-->
-                       <!--[pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>-->
+        <mat-paginator [length]="count" [pageSize]="20" showFirstLastButtons
+                       (page)="loadPage($event)"></mat-paginator>
     </div>
 
 </div>
