@@ -8,7 +8,7 @@
 
             <li class="nav-item dropdown" ngbDropdown>
                 <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
-                    Нурланбек Толхын <b class="caret"></b>
+                    {{loggedIn ? user.name : 'undefined'}} <b class="caret"></b>
                 </a>
                 <div class="dropdown-menu-right" ngbDropdownMenu>
                     <a class="dropdown-item" [routerLink]="['/login']" (click)="onLoggedout()">

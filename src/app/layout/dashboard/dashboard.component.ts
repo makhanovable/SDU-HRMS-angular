@@ -19,6 +19,11 @@ export class DashboardComponent implements OnInit {
     count: number;
     displayedColumns = ['pos', 'age', 'exp', 'last_j', 'info'];
 
+    wrd = '';
+    exp = 'no';
+    sal = 'no';
+    src = 'hh';
+
     constructor(private http: SearchService) {
     }
 
@@ -26,25 +31,28 @@ export class DashboardComponent implements OnInit {
     }
 
     search(str: string) {
-        console.log('searching for = ' + str);
+        this.wrd = str;
+        console.log('searching for = ' + this.wrd + ', exp = ' + this.exp
+            + ', sal = ' + this.sal + ', src = ' + this.src);
 
         let params = new HttpParams();
-        params = params.set('wrd', str);
-        params = params.set('exp', '180');
-        params = params.set('sal', '180-08426');
-        params = params.set('src', 'hh');
+        params = params.set('wrd', this.wrd);
+        params = params.set('exp', this.exp);
+        params = params.set('sal', this.sal);
+        params = params.set('src', this.src);
         params = params.set('page', '0');
         this.load(params);
     }
 
     loadPage(event) {
-        console.log('searching for = ');
+        console.log('searching for = ' + this.wrd + ', exp = ' + this.exp
+            + ', sal = ' + this.sal + ', src = ' + this.src);
 
         let params = new HttpParams();
-        params = params.set('wrd', '');
-        params = params.set('exp', '180');
-        params = params.set('sal', '180-08426');
-        params = params.set('src', 'link');
+        params = params.set('wrd', this.wrd);
+        params = params.set('exp', this.exp);
+        params = params.set('sal', this.sal);
+        params = params.set('src', this.src);
         params = params.set('page', event.pageIndex + '');
         this.load(params);
     }
@@ -71,12 +79,26 @@ export class DashboardComponent implements OnInit {
 
     info(str: string) {
         if (str !== '') {
-            const url = 'https://hh.kz/resume/' + str;
-            window.open(url, '_blank');
-            console.log('hash = ' + str);
+            window.open(str, '_blank');
+            console.log('url = ' + str);
         } else {
-            console.log('empty hash');
+            console.log('empty url');
         }
+    }
+
+    expF(event) {
+        console.log(event.target.value);
+        this.exp = event.target.value;
+    }
+
+    salF(event) {
+        console.log(event.target.value);
+        this.sal = event.target.value;
+    }
+
+    srcF(event) {
+        console.log(event.target.value);
+        this.src = event.target.value;
     }
 
 }

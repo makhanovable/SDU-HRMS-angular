@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router, NavigationEnd} from '@angular/router';
+import {AuthService, SocialUser} from 'ng4-social-login';
 
 @Component({
     selector: 'app-header',
@@ -8,8 +9,10 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
     pushRightClass = 'push-right';
+    public user: SocialUser;
+    public loggedIn: boolean;
 
-    constructor(public router: Router) {
+    constructor(public router: Router,  private authService: AuthService) {
 
         this.router.events.subscribe(val => {
             if (
@@ -22,7 +25,12 @@ export class HeaderComponent implements OnInit {
         });
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.authService.authState.subscribe((user) => {
+            this.user = user;
+            this.loggedIn = (user != null);
+        });
+    }
 
     isToggled(): boolean {
         const dom: Element = document.querySelector('body');
@@ -35,6 +43,7 @@ export class HeaderComponent implements OnInit {
     }
 
     onLoggedout() {
+        this.authService.signOut();
         localStorage.removeItem('isLoggedin');
     }
 

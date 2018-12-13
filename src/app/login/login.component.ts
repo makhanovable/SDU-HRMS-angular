@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {routerTransition} from '../router.animations';
+import {AuthService, GoogleLoginProvider, SocialUser} from 'ng4-social-login';
 
 @Component({
     selector: 'app-login',
@@ -10,13 +11,19 @@ import {routerTransition} from '../router.animations';
 })
 export class LoginComponent implements OnInit {
 
-    constructor(public router: Router) {
+    public user: any = SocialUser;
+
+    constructor(public router: Router, private socialAuthService: AuthService) {
     }
 
     ngOnInit() {
     }
 
     onLoggedIn() {
-        localStorage.setItem('isLoggedin', 'true');
+        this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then((userData) => {
+            this.user = userData;
+            localStorage.setItem('isLoggedin', 'true');
+        });
     }
+
 }

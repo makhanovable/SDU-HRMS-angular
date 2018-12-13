@@ -8,7 +8,21 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {AuthGuard} from './shared';
 import {SearchService} from './layout/dashboard/search.service';
+import {
+    SocialLoginModule, AuthServiceConfig, GoogleLoginProvider
+} from 'ng4-social-login';
 
+const config = new AuthServiceConfig([
+    {
+        id: GoogleLoginProvider.PROVIDER_ID,
+        provider: new GoogleLoginProvider(
+            '824592970149-g0n6cmmrmph5l19lg6qpr0ht5v05ckt4.apps.googleusercontent.com')
+    }
+], false);
+
+export function provideConfig() {
+    return config;
+}
 
 @NgModule({
     imports: [
@@ -16,10 +30,13 @@ import {SearchService} from './layout/dashboard/search.service';
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
-        AppRoutingModule
+        AppRoutingModule,
+        SocialLoginModule
     ],
     declarations: [AppComponent],
-    providers: [AuthGuard, SearchService],
+    providers: [
+        {provide: AuthServiceConfig, useFactory: provideConfig},
+        AuthGuard, SearchService],
     bootstrap: [AppComponent]
 })
 

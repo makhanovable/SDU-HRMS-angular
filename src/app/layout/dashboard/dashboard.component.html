@@ -5,23 +5,23 @@
 
         <input class="nnn" #searching (keyup.enter)="search(searching.value)">
 
-        <select class="m" matNativeControl required>
-            <option value="other">Не имеет значения</option>
-            <option value="y13">От 1 года до 3 лет</option>
-            <option value="y36">От 3 до 6 лет</option>
-            <option value="n">Без опыта</option>
-            <option value="y6">Более 6 лет</option>
+        <select class="m" matNativeControl required (change)="expF($event)">
+            <option value="no">Не имеет значения</option>
+            <option value="between1And3">От 1 года до 3 лет</option>
+            <option value="between3And6">От 3 до 6 лет</option>
+            <option value="noExperience">Без опыта</option>
+            <option value="moreThan6">Более 6 лет</option>
         </select>
 
-        <select class="m" matNativeControl required>
-            <option value="other">Не имеет значения</option>
-            <option value="k200500">От 200k-500k</option>
-            <option value="k500700">От 500k-700k</option>
-            <option value="k700">От 700k</option>
-            <option value="k200">До 200k</option>
+        <select class="m" matNativeControl required  (change)="salF($event)">
+            <option value="no">Не имеет значения</option>
+            <option value="200#500">От 200k-500k</option>
+            <option value="500#700">От 500k-700k</option>
+            <option value="700#inf">От 700k</option>
+            <option value="0#200">До 200k</option>
         </select>
 
-        <select class="m" matNativeControl required>
+        <select class="m" matNativeControl required  (change)="srcF($event)">
             <option value="hh">hh.kz</option>
             <option value="linkedin">linkedin.com</option>
         </select>
