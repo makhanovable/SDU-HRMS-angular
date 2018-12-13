@@ -9,6 +9,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatTableModule} from '@angular/material/table';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatInputModule} from '@angular/material/input';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSelectModule} from '@angular/material/select';
 
@@ -16,7 +17,7 @@ import {MatSelectModule} from '@angular/material/select';
     imports: [CommonModule, DashboardRoutingModule,
         PageHeaderModule, MatButtonModule, MatListModule,
         MatTableModule, MatFormFieldModule, MatPaginatorModule,
-        MatProgressSpinnerModule, MatSelectModule],
+        MatProgressSpinnerModule, MatSelectModule, MatInputModule],
     declarations: [DashboardComponent]
 })
 export class DashboardModule {

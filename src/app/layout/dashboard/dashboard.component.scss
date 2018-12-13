@@ -4,23 +4,21 @@ table {
 
 .list-div-container {
     width: 90%;
-    margin: 5% auto;
+    margin: 5%;
     position: relative;
 }
 
-.nnn {
-    width: 25%;
-    margin: 1% auto;
-    margin-left: 1%;
+.input {
+    margin: 2%;
     position: relative;
 }
 
-.m {
-    width: 20%;
-    margin: 1% auto;
-    margin-left: 1%;
+.row {
+    width: 180px;
+    margin: 2%;
     position: relative;
 }
+
 
 .example-loading-shade {
     position: absolute;
@@ -52,27 +50,6 @@ table {
     width: 95%;
 }
 
-.makhan-btn {
-    position: absolute;
-    bottom: 0px;
-    right: -50px;
-    display: flex;
-    align-items: center;
-}
-
-.makhan-btn ul {
-    list-style: none;
-}
-
-.makhan-btn button {
-    margin-bottom: 4px;
-}
-
-.makhan-filter {
-    margin-left: 20px;
-    margin-top: 5px;
-}
-
 .mat-row.selected {
     background: #dddddd;
 }
@@ -90,32 +67,9 @@ table {
 }
 
 .spinner-container mat-spinner {
-    margin: 130px auto 0 auto;
+    margin: 130px auto 1% auto;
 }
 
-/* Column Widths */
-.mat-column-number,
-.mat-column-state {
-    max-width: 64px;
-}
-
-.mat-column-created {
-    max-width: 124px;
-}
-.report_btn {
-    margin-left: 550px;
-    alignment: right;
-}
-mat-toolbar {
-    position: relative;
-    width: 100%;
-}
-.report {
-    position: absolute;
-    right: 5%;
-    color: gray;
-    border-radius: 5px;
-    background: white;
-    padding: 5px;
-    width: 20%;
+.matcell {
+    margin: 5% auto 5% auto;
 }

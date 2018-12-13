@@ -87,18 +87,18 @@ export class DashboardComponent implements OnInit {
     }
 
     expF(event) {
-        console.log(event.target.value);
-        this.exp = event.target.value;
+        console.log(event.value);
+        this.exp = event.value;
     }
 
     salF(event) {
-        console.log(event.target.value);
-        this.sal = event.target.value;
+        console.log(event.value);
+        this.sal = event.value;
     }
 
     srcF(event) {
-        console.log(event.target.value);
-        this.src = event.target.value;
+        console.log(event.value);
+        this.src = event.value;
     }
 
 }

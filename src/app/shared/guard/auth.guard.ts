@@ -4,11 +4,12 @@ import {Router} from '@angular/router';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
+
     constructor(private router: Router) {
     }
 
     canActivate() {
-        if (localStorage.getItem('isLoggedin')) {
+        if (localStorage.getItem('username')) {
             return true;
         }
 

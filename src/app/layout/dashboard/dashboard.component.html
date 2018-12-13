@@ -3,30 +3,33 @@
 
     <div class="mat-elevation-z8 list-div-container">
 
-        <input class="nnn" #searching (keyup.enter)="search(searching.value)">
+        <mat-form-field class="input">
+            <input #searching (keyup.enter)="search(searching.value)" matInput placeholder="Введите ключевое слово">
+            <mat-hint>Например: Android Developer</mat-hint>
+        </mat-form-field>
 
-        <select class="m" matNativeControl required (change)="expF($event)">
-            <option value="no">Не имеет значения</option>
-            <option value="between1And3">От 1 года до 3 лет</option>
-            <option value="between3And6">От 3 до 6 лет</option>
-            <option value="noExperience">Без опыта</option>
-            <option value="moreThan6">Более 6 лет</option>
-        </select>
+        <mat-select placeholder="Опыт Работы" class="row" matNativeControl (selectionChange)="expF($event)">
+            <mat-option value="no">--</mat-option>
+            <mat-option value="between1And3">От 1 года до 3 лет</mat-option>
+            <mat-option value="between3And6">От 3 до 6 лет</mat-option>
+            <mat-option value="noExperience">Без опыта</mat-option>
+            <mat-option value="moreThan6">Более 6 лет</mat-option>
+        </mat-select>
 
-        <select class="m" matNativeControl required  (change)="salF($event)">
-            <option value="no">Не имеет значения</option>
-            <option value="200#500">От 200k-500k</option>
-            <option value="500#700">От 500k-700k</option>
-            <option value="700#inf">От 700k</option>
-            <option value="0#200">До 200k</option>
-        </select>
+        <mat-select placeholder="Зарплата" class="row" matNativeControl (selectionChange)="salF($event)">
+            <mat-option value="no">--</mat-option>
+            <mat-option value="200#500">От 200k-500k</mat-option>
+            <mat-option value="500#700">От 500k-700k</mat-option>
+            <mat-option value="700#inf">От 700k</mat-option>
+            <mat-option value="0#200">До 200k</mat-option>
+        </mat-select>
 
-        <select class="m" matNativeControl required  (change)="srcF($event)">
-            <option value="hh">hh.kz</option>
-            <option value="linkedin">linkedin.com</option>
-        </select>
+        <mat-select placeholder="Ресурс" class="row" matNativeControl (selectionChange)="srcF($event)">
+            <mat-option value="hh">hh.kz</mat-option>
+            <mat-option value="linkedin">linkedin.com</mat-option>
+        </mat-select>
 
-        <button mat-button (click)="search(searching.value)">Поиск</button>
+        <button mat-stroked-button class="row" (click)="search(searching.value)">Поиск</button>
 
         <div class="example-loading-shade" *ngIf="isLoadingResult">
             <mat-spinner></mat-spinner>
@@ -38,27 +41,27 @@
 
                 <ng-container matColumnDef="pos">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Должность</th>
-                    <td mat-cell *matCellDef="let result">{{result.position}}</td>
+                    <td mat-cell class="matcell" *matCellDef="let result">{{result.position}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="age">
                     <th mat-header-cell *matHeaderCellDef>Возраст</th>
-                    <td mat-cell *matCellDef="let result">{{result.age}}</td>
+                    <td mat-cell class="matcell" *matCellDef="let result">{{result.age}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="exp">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Опыт работы</th>
-                    <td mat-cell *matCellDef="let result">{{result.experience}}</td>
+                    <td mat-cell class="matcell" *matCellDef="let result">{{result.experience}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="last_j">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Последнее место работы</th>
-                    <td mat-cell *matCellDef="let result">{{result.last_job}}</td>
+                    <td mat-cell class="matcell" *matCellDef="let result">{{result.last_job}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="info">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
-                    <button mat-button *matCellDef="let result" (click)="info(result.id)">Инфо</button>
+                    <button mat-stroked-button class="matcell" *matCellDef="let result" (click)="info(result.id)">Инфо</button>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -68,7 +71,8 @@
 
         </div>
 
-        <mat-paginator [length]="count" [pageSize]="20" showFirstLastButtons
+        <mat-paginator [length]="count" [pageSize]="20" [hidePageSize]="true" example-rate-limit-reached
+                       showFirstLastButtons
                        (page)="loadPage($event)"></mat-paginator>
     </div>
 
